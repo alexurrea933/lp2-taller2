@@ -8,7 +8,7 @@ conexion.row_factory = sqlite3.Row
 cursor = conexion.cursor()
 cursor.execute("SELECT * FROM productos")
 productos = [dict (producto) for producto in cursor.fetchall()] :
-print("Productos:")
+pprint("Productos:")
 cursor.close()
 conexion.close()
 # aplicación
