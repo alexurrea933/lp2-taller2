@@ -2,12 +2,20 @@
 import sqlite3
 
 # establecer la conexion
-
+conexion = sqlite3.connect('productos.db')
+cursor = conexion.cursor()
 # eliminar la tabla
-
+cursor.execute("DROP TABLE IF EXISTS productos")
 # crear la tabla
 cursor.execute("""
-
+  CREATE TABLE productos (  
+    id INTEGER PRIMARY KEY,
+    tipo TEXT NOT NULL,
+    marca TEXT NOT NULL,
+    modelo TEXT NOT NULL,
+    descripcion TEXT,
+    precio INTEGER NOT NULL
+  )
 """)
 
 # insertar los datos iniciales
@@ -23,8 +31,17 @@ datos = [
   (304, 'Tablet', 'Huawei', 'MatePad SE 10.1', '128Gb, Pantalla 10.1p 2K, USB-C, Wifi', 931000),
 ]
 
+
 cursor.executemany("""
 
+INSERT INTO productos (
+    id, 
+    tipo,
+    marca,
+    modelo,
+    descripcion,
+    precio
+    )VALUES (?, ?, ?, ?, ?, ?)
 """, datos)
 
 # grabar
